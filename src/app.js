@@ -6,9 +6,10 @@ const port = process.env.PORT || 8000;
 
 app.use(express.json());
 
-app.get("/notes", async (req, res) => {
+app.get("/notes/:uid", async (req, res) => {
+  const uid = req.params.uid
   try {
-    const notesData = await Note.find();
+    const notesData = await Note.find({ uid: uid});
     res.send(notesData);
   } catch (e) {
     res.send(e);
@@ -36,7 +37,6 @@ app.delete("/notes/:id", async (req, res) => {
 });
 
 app.post("/notes", async (req, res) => {
-  console.log(req);
   const note = new Note(req.body);
   try {
     await note.save();

@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   container: {
     maxWidth: 1200,
     height: "calc(100vh - 112px)",
-    overflow: 'auto'
+    overflow: "auto",
   },
 });
 
@@ -31,6 +31,8 @@ export default function Notes() {
   const classes = useStyles();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const deleteHandler = async (_id) => {
     try {
@@ -49,7 +51,7 @@ export default function Notes() {
     try {
       axios({
         method: "get",
-        url: `http://localhost:8000/notes/`,
+        url: `http://localhost:8000/notes/${user.uid}`,
       }).then((res) => {
         setLoading(false);
         if (res.data.length !== 0) {
@@ -71,13 +73,13 @@ export default function Notes() {
     <Container className={classes.container}>
       {loading ? (
         <Grid container spacing={5} justify="space-between">
-          <Grid item xs={12} sm={6} md={4} >
+          <Grid item xs={12} sm={6} md={4}>
             <Skeleton height={200} />
           </Grid>
-          <Grid item xs={12} sm={6} md={4} >
+          <Grid item xs={12} sm={6} md={4}>
             <Skeleton height={200} />
           </Grid>
-          <Grid item xs={12} sm={6} md={4} >
+          <Grid item xs={12} sm={6} md={4}>
             <Skeleton height={200} />
           </Grid>
         </Grid>

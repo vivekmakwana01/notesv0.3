@@ -38,6 +38,8 @@ export default function Create() {
   const [category, setCategory] = useState("todos");
   const [loading, setLoading] = useState(false)
 
+  const user = JSON.parse(localStorage.getItem('user'))
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -55,6 +57,7 @@ export default function Create() {
           title: title,
           details: details,
           category: category,
+          uid: user.uid
         });
         setLoading(false)
         history.push("/");

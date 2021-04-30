@@ -16,6 +16,10 @@ const noteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  uid: {
+    type: String,
+    required: true
+  }
 });
 
 const Note = new mongoose.model("Note", noteSchema);
